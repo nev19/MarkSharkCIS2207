@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="student.js"></script>
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+</head>
+
+<body>
+    <div class="content">
+        <div class="sidebar">
+            <div class="titleBox">Questions</div>
+            <div class="questionBox" id="questionBox1" onclick="showQuestion(1)">1. Write an essay of approximately 500 words on the causes and effects of tectonic plate shifts</div>
+            <div class="questionBox" id="questionBox2" onclick="showQuestion(2)">2. Encapsulation is when methods are made to operate on the data as a single unit</div>
+            <div class="questionBox" id="questionBox3" onclick="showQuestion(3)">3. Which of the following is not one of the four main principles of OOP?</div>
+            <div class="questionBox" id="questionBox4" onclick="showQuestion(4)">4. Design a UML for an online banking system</div>
+        </div>
+        <div class="workspace">
+            <div class="workspaceBar">
+                <div class="timeBox" id="countdown"></div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar">Progress</div>
+                </div>
+                <button class="examViewButton" onclick="openPdf()">View Rubric</button>
+            </div>
+            <div class="workspaceMain">
+                <div class="question" id="question1">
+                    <div class="SectionMarker">
+                        <p><b>Question 1: </b>What is polymorphism in Object-Oriented Programming?</p>
+                        <div class="marks">20 Marks</div>
+                    </div>
+                    <div id="editor"></div>
+                </div>
+                <div class="question" id="question2" style="display:none;">
+                    <div class="SectionMarker">
+                        <p><b>Question 2: </b>Encapsulation is when methods are made to operate on the data as a single unit</p>
+                        <div class="marks">5 Marks</div>
+                    </div>
+                    <div class="options-container">
+                        <div class="option" onclick="selectAnswer(this, true)">True</div>
+                        <div class="option" onclick="selectAnswer(this, false)">False</div>
+                    </div>
+                </div>
+                <div class="question" id="question3" style="display:none;">
+                    <div class="SectionMarker">
+                        <p><b>Question 3: </b>Which of the following is <u>NOT</u> one of the four main principles of OOP?</p>
+                        <div class="marks">10 Marks</div>
+                    </div>
+                    <div class="multipleOptionsContainer">
+                        <div class="option" onclick="selectMultipleAnswers(this)">Encapsulation</div>
+                        <div class="option" onclick="selectMultipleAnswers(this)">Inheritance</div>
+                        <div class="option" onclick="selectMultipleAnswers(this)">Abstraction</div>
+                        <div class="option" onclick="selectMultipleAnswers(this)">Iteration</div>
+                    </div>
+                </div>
+                <div class="question" id="question4" style="display:none;">
+                    <div class="SectionMarker">
+                        <p><b>Question 4: </b>Design a UML for an online banking system</p>
+                        <div class="marks">15 Marks</div>
+                    </div>
+                    <div class="options-container">
+                        <input class="pdfUpload" type="file" accept=".pdf" onchange="handleFileUpload()">
+                        <button class="examViewButton" onclick="viewFile()" id="viewButton" disabled>View</button>
+                        <button class="examViewButton" onclick="removeFile()" id="removeButton" disabled>Remove</button>
+                    </div>
+                </div>
+            </div>
+            <div class="workspaceBar">
+                <div class="navigationButtonContainer">
+                    <button class="navigationButton" id="prev" onclick="showPreviousQuestion()">Prev</button>
+                    <button class="navigationButton" onclick="markQuestion()">Mark as Done</button>
+                    <button class="navigationButton" id="skip" onclick="skipQuestion()">Next</button>
+                </div>
+                <button class="examViewButton" id="submit" onclick="checkSubmit()">Submit</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        CKEDITOR.replace('editor');
+
+        const totalQuestions = 4;
+        let markedQuestions = 0;
+
+        function showQuestion(questionNumber) {
+            document.querySelectorAll('.question').forEach(question => {
+                question.style.display = 'none';
+            });
+
+            document.getElementById(`question${questionNumber}`).style.display = 'block';
+
+            document.querySelectorAll('.questionBox').forEach(box => {
+                box.classList.remove('active-question');
+            });
+            document.getElementById(`questionBox${questionNumber}`).classList.add('active-question');
+
+            const markButton = document.querySelector('.navigationButton:nth-child(2)');
+            const currentQuestionBox = document.getElementById(`questionBox${questionNumber}`);
+            markButton.textContent = currentQuestionBox.classList.contains('marked-question') ? 'Remove Mark' : 'Mark as Done';
+
+            const skipButton = document.getElementById('skip');
+            skipButton.classList.toggle('disabled', questionNumber === totalQuestions);
+            skipButton.style.cursor = (questionNumber === totalQuestions) ? 'not-allowed' : 'pointer';
+
+            const prevButton = document.getElementById('prev');
+            prevButton.classList.toggle('disabled', questionNumber === 1);
+            prevButton.style.cursor = (questionNumber === 1) ? 'not-allowed' : 'pointer';
+
+            updateSubmitButton();
+        }
+
+        function showPreviousQuestion() {
+            const activeQuestionNumber = parseInt(document.querySelector('.active-question').id.match(/\d+/)[0]);
+
+            const previousQuestionNumber = activeQuestionNumber > 1 ? activeQuestionNumber - 1 : 1;
+            showQuestion(previousQuestionNumber);
+
+            const prevButton = document.getElementById('prev');
+            prevButton.classList.toggle('disabled', previousQuestionNumber === 1);
+            prevButton.style.cursor = (previousQuestionNumber === 1) ? 'not-allowed' : 'pointer';
+        }
+
+        function skipQuestion() {
+            const activeQuestionNumber = parseInt(document.querySelector('.active-question').id.match(/\d+/)[0]);
+
+            const nextQuestionNumber = activeQuestionNumber < totalQuestions ? activeQuestionNumber + 1 : 1;
+            showQuestion(nextQuestionNumber);
+
+            const skipButton = document.getElementById('skip');
+            skipButton.classList.toggle('disabled', nextQuestionNumber === totalQuestions);
+            skipButton.style.cursor = (nextQuestionNumber === totalQuestions) ? 'not-allowed' : 'pointer';
+
+            if (nextQuestionNumber === 1) {
+                alert('You have reached the end of the questions.');
+            }
+
+            updateSubmitButton();
+        }
+
+        function markQuestion() {
+            const activeQuestionNumber = parseInt(document.querySelector('.active-question').id.match(/\d+/)[0]);
+
+            const questionBox = document.getElementById(`questionBox${activeQuestionNumber}`);
+            const isMarked = questionBox.classList.toggle('marked-question');
+
+            markedQuestions = document.querySelectorAll('.marked-question').length;
+
+            updateProgressBar();
+
+            const markButton = document.querySelector('.navigationButton:nth-child(2)');
+            markButton.textContent = isMarked ? 'Remove Mark' : 'Mark as Done';
+
+            if (isMarked) {
+                for (let i = 1; i <= totalQuestions; i++) {
+                    const nextQuestionBox = document.getElementById(`questionBox${i}`);
+                    if (!nextQuestionBox.classList.contains('marked-question')) {
+                        showQuestion(i);
+                        return;
+                    }
+                }
+            }
+
+            updateSubmitButton();
+        }
+
+        function updateProgressBar() {
+            const progressBar = document.getElementById('progressBar');
+            const progress = (markedQuestions / totalQuestions) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        const countdownElement = document.getElementById('countdown');
+        let countdownTime = 2 * 60 * 60;
+
+        function formatTime(time) {
+            return time < 10 ? `0${time}` : time;
+        }
+
+        function updateCountdown() {
+            const hours = Math.floor(countdownTime / 3600);
+            const minutes = Math.floor((countdownTime % 3600) / 60);
+            const seconds = countdownTime % 60;
+
+            const formattedHours = formatTime(hours);
+            const formattedMinutes = formatTime(minutes);
+            const formattedSeconds = formatTime(seconds);
+
+            countdownElement.textContent = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+
+            if (countdownTime > 0) {
+                countdownTime--;
+                setTimeout(updateCountdown, 1000);
+            } else {
+                countdownElement.textContent = "Time's up!";
+            }
+        }
+
+        updateCountdown();
+
+        function selectAnswer(div, userAnswer) {
+            var options = document.querySelectorAll('.option');
+            options.forEach(function(opt) {
+                opt.classList.remove('selected');
+            });
+
+            div.classList.add('selected');
+        }
+
+        function updateSubmitButton() {
+            const progressBar = document.getElementById('progressBar');
+            const progress = (markedQuestions / totalQuestions) * 100;
+
+            const submitButton = document.getElementById('submit');
+            submitButton.classList.toggle('disabled', progress !== 100);
+            submitButton.style.cursor = (progress !== 100) ? 'not-allowed' : 'pointer';
+        }
+
+        function checkSubmit() {
+            const progressBar = document.getElementById('progressBar');
+            const progress = (markedQuestions / totalQuestions) * 100;
+
+            if (markedQuestions === totalQuestions) {
+                alert('Your answers have been submitted successfully!');
+
+                // Redirect to studentDashboard.html after a delay of 500 milliseconds
+                setTimeout(function() {
+                    window.location.href = 'studentDashboard.html';
+                }, 500);
+            } else {
+                alert('Please complete all marked questions before submitting.');
+            }
+        }
+
+        function handleFileUpload() {
+            const pdfUploadInput = document.querySelector('.pdfUpload');
+            const viewButton = document.getElementById('viewButton');
+            const removeButton = document.getElementById('removeButton');
+
+            if (pdfUploadInput.files.length > 0) {
+                viewButton.removeAttribute('disabled');
+                removeButton.removeAttribute('disabled');
+            } else {
+                viewButton.setAttribute('disabled', true);
+                removeButton.setAttribute('disabled', true);
+            }
+        }
+
+        function removeFile() {
+            const pdfUploadInput = document.querySelector('.pdfUpload');
+            const viewButton = document.getElementById('viewButton');
+            const removeButton = document.getElementById('removeButton');
+
+            pdfUploadInput.value = null;
+            viewButton.setAttribute('disabled', true);
+            removeButton.setAttribute('disabled', true);
+        }
+
+        function viewFile() {
+            const pdfUploadInput = document.querySelector('.pdfUpload');
+
+            if (pdfUploadInput.files.length > 0) {
+                const pdfFile = pdfUploadInput.files[0];
+                const fileURL = URL.createObjectURL(pdfFile);
+                window.open(fileURL, '_blank');
+            }
+        }
+
+        function selectMultipleAnswers(option) {
+            option.classList.toggle('selected');
+        }
+
+        function openPdf() {    
+            var pdfPath = 'rubric.pdf';
+            window.open(pdfPath, '_blank');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            showQuestion(1);
+        });
+    </script>
+</body>
+</html>

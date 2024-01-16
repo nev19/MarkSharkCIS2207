@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+    <script src="lecturer.js"></script>
+</head>
+
+<body>
+    <div class="content">
+        <div class="workspace">
+            <div class="workspaceBar">
+                <div class="timeBox" id="countdown">25/1/24 2HRS</div>
+                <div class="titleBar">
+                    CIS1234 Principles of OOP
+                </div>
+                <button class="examViewButton" onclick="openPdf()">View Rubric</button>
+            </div>
+            <div class="workspaceMainGrading">
+                <div class="question" id="question1">
+                    <div class="SectionMarker">
+                        <p><b>Question 1: </b>What is polymorphism in Object-Oriented Programming?</p>
+                        <div class="marks">
+                            <input type="text" class="transparentTextField" maxlength="2">/20 Marks
+                        </div>
+                    </div>
+                    <div id="editor1"></div>
+                    <div class="SectionMarker">
+                        <p><b>Question 2: </b>Encapsulation is when methods are made to operate on the data as a single unit</p>
+                        <div class="marks">
+                            5/5 Marks
+                        </div>
+                    </div>
+                    <div class="options-container">
+                        <div class="selected selectedGraded">True</div>
+                        <div class="option graded">False</div>
+                    </div>
+                    <div class="SectionMarker">
+                        <p><b>Question 3: </b>Which of the following is <u>NOT</u> one of the four main principles of OOP?</p>
+                        <div class="marks">
+                            5/10 Marks
+                        </div>
+                    </div>
+                    <div class="multipleOptionsContainer">
+                        <div class="option graded" onclick="selectMultipleAnswers(this)">Encapsulation</div>
+                        <div class="option graded" onclick="selectMultipleAnswers(this)">Inheritance</div>
+                        <div class="selected selectedGraded" onclick="selectMultipleAnswers(this)">Abstraction</div>
+                        <div class="selected selectedGraded" onclick="selectMultipleAnswers(this)">Iteration</div>
+                    </div>
+                    <div class="SectionMarker">
+                        <p><b>Question 4: </b>Design a UML for an online banking system</p>
+                        <div class="marks">
+                            <input type="text" class="transparentTextField" maxlength="2">/15 Marks
+                        </div>
+                    </div>
+                    <div class="options-container">
+                        <button class="selected selectedGraded examViewButton" onclick="openPDF()">View</button>
+                    </div>
+                </div>
+
+                <div class="question" id="question2" style="display:none;">
+                    <div class="SectionMarker">
+                        <p><b>Question 1: </b>What is polymorphism in Object-Oriented Programming?</p>
+                        <div class="marks">
+                            <input type="text" class="transparentTextField" maxlength="2">/20 Marks
+                        </div>
+                    </div>
+                    <div id="editor2"></div>
+                    <div class="SectionMarker">
+                        <p><b>Question 2: </b>Encapsulation is when methods are made to operate on the data as a single unit</p>
+                        <div class="marks">
+                            0/5 Marks
+                        </div>
+                    </div>
+                    <div class="options-container">
+                        <div class="option graded">True</div>
+                        <div class="selected selectedGraded">False</div>
+                    </div>
+                    <div class="SectionMarker">
+                        <p><b>Question 3: </b>Which of the following is <u>NOT</u> one of the four main principles of OOP?</p>
+                        <div class="marks">
+                            5/10 Marks
+                        </div>
+                    </div>
+                    <div class="multipleOptionsContainer">
+                        <div class="option graded" onclick="selectMultipleAnswers(this)">Encapsulation</div>
+                        <div class="option graded" onclick="selectMultipleAnswers(this)">Inheritance</div>
+                        <div class="selected selectedGraded" onclick="selectMultipleAnswers(this)">Abstraction</div>
+                        <div class="selected selectedGraded" onclick="selectMultipleAnswers(this)">Iteration</div>
+                    </div>
+                    <div class="SectionMarker">
+                        <p><b>Question 4: </b>Design a UML for an online banking system</p>
+                        <div class="marks">
+                            <input type="text" class="transparentTextField" maxlength="2">/15 Marks
+                        </div>
+                    </div>
+                    <div class="options-container">
+                        <button class="selected selectedGraded examViewButton" onclick="openPDF()">View</button>
+                    </div>
+                </div>
+
+                <div class="question" id="question3" style="display:none;">
+                    <div class="SectionMarker">
+                        <p><b>Question 1: </b>What is polymorphism in Object-Oriented Programming?</p>
+                        <div class="marks">
+                            <input type="text" class="transparentTextField" maxlength="2">/20 Marks
+                        </div>
+                    </div>
+                    <div id="editor3"></div>
+                    <div class="SectionMarker">
+                        <p><b>Question 2: </b>Encapsulation is when methods are made to operate on the data as a single unit</p>
+                        <div class="marks">
+                            0/5 Marks
+                        </div>
+                    </div>
+                    <div class="options-container">
+                        <div class="option graded">True</div>
+                        <div class="selected selectedGraded">False</div>
+                    </div>
+                    <div class="SectionMarker">
+                        <p><b>Question 3: </b>Which of the following is <u>NOT</u> one of the four main principles of OOP?</p>
+                        <div class="marks">
+                            5/10 Marks
+                        </div>
+                    </div>
+                    <div class="multipleOptionsContainer">
+                        <div class="option graded" onclick="selectMultipleAnswers(this)">Encapsulation</div>
+                        <div class="option graded" onclick="selectMultipleAnswers(this)">Inheritance</div>
+                        <div class="selected selectedGraded" onclick="selectMultipleAnswers(this)">Abstraction</div>
+                        <div class="selected selectedGraded" onclick="selectMultipleAnswers(this)">Iteration</div>
+                    </div>
+                    <div class="SectionMarker">
+                        <p><b>Question 4: </b>Design a UML for an online banking system</p>
+                        <div class="marks">
+                            <input type="text" class="transparentTextField" maxlength="2">/15 Marks
+                        </div>
+                    </div>
+                    <div class="options-container">
+                        <button class="selected selectedGraded examViewButton" onclick="openPDF()">View</button>
+                    </div>
+                </div>
+
+                <div class="question" id="question4" style="display:none;">
+                    <div class="SectionMarker">
+                        <p><b>Question 1: </b>What is polymorphism in Object-Oriented Programming?</p>
+                        <div class="marks">
+                            <input type="text" class="transparentTextField" maxlength="2">/20 Marks
+                        </div>
+                    </div>
+                    <div id="editor4"></div>
+                    <div class="SectionMarker">
+                        <p><b>Question 2: </b>Encapsulation is when methods are made to operate on the data as a single unit</p>
+                        <div class="marks">
+                            0/5 Marks
+                        </div>
+                    </div>
+                    <div class="options-container">
+                        <div class="option graded">True</div>
+                        <div class="selected selectedGraded">False</div>
+                    </div>
+                    <div class="SectionMarker">
+                        <p><b>Question 3: </b>Which of the following is <u>NOT</u> one of the four main principles of OOP?</p>
+                        <div class="marks">
+                            5/10 Marks
+                        </div>
+                    </div>
+                    <div class="multipleOptionsContainer">
+                        <div class="option graded" onclick="selectMultipleAnswers(this)">Encapsulation</div>
+                        <div class="option graded" onclick="selectMultipleAnswers(this)">Inheritance</div>
+                        <div class="selected selectedGraded" onclick="selectMultipleAnswers(this)">Abstraction</div>
+                        <div class="selected selectedGraded" onclick="selectMultipleAnswers(this)">Iteration</div>
+                    </div>
+                    <div class="SectionMarker">
+                        <p><b>Question 4: </b>Design a UML for an online banking system</p>
+                        <div class="marks">
+                            <input type="text" class="transparentTextField" maxlength="2">/15 Marks
+                        </div>
+                    </div>
+                    <div class="options-container">
+                        <button class="selected selectedGraded examViewButton" onclick="openPDF()">View</button>
+                    </div>
+                </div>
+            </div>
+            <div class="workspaceBar">
+                <div class="navigationButtonContainer">
+                    <button class="navigationButton" id="prev" onclick="showPreviousQuestion()">Prev</button>
+                    <button class="navigationButton" onclick="markQuestion()">Mark as Corrected</button>
+                    <button class="navigationButton" id="skip" onclick="skipQuestion()">Next</button>
+                </div>
+                <button class="examViewButton" id="submit" onclick="checkSubmit()">Submit to Administration</button>
+            </div>
+        </div>
+        <div class="sidebar">
+            <div class="titleBox">Candidates</div>
+            <div class="questionBox" id="questionBox1" onclick="showQuestion(1)">Candidate 1</div>
+            <div class="questionBox" id="questionBox2" onclick="showQuestion(2)">Candidate 2</div>
+            <div class="questionBox" id="questionBox3" onclick="showQuestion(3)">Candidate 3</div>
+            <div class="questionBox" id="questionBox4" onclick="showQuestion(4)">Candidate 4</div>
+        </div>
+    </div>
+    <script>
+        CKEDITOR.replace('editor1');
+        CKEDITOR.replace('editor2');
+        CKEDITOR.replace('editor3');
+        CKEDITOR.replace('editor4');
+
+        const totalQuestions = 4;
+        let markedQuestions = 0;
+
+        function showQuestion(questionNumber) {
+            document.querySelectorAll('.question').forEach(question => {
+                question.style.display = 'none';
+            });
+
+            document.getElementById(`question${questionNumber}`).style.display = 'block';
+
+            document.querySelectorAll('.questionBox').forEach(box => {
+                box.classList.remove('active-question');
+            });
+            document.getElementById(`questionBox${questionNumber}`).classList.add('active-question');
+
+            const markButton = document.querySelector('.navigationButton:nth-child(2)');
+            const currentQuestionBox = document.getElementById(`questionBox${questionNumber}`);
+            markButton.textContent = currentQuestionBox.classList.contains('marked-question') ? 'Remove Mark' : 'Mark as Corrected';
+
+            const skipButton = document.getElementById('skip');
+            skipButton.classList.toggle('disabled', questionNumber === totalQuestions);
+            skipButton.style.cursor = (questionNumber === totalQuestions) ? 'not-allowed' : 'pointer';
+
+            const prevButton = document.getElementById('prev');
+            prevButton.classList.toggle('disabled', questionNumber === 1);
+            prevButton.style.cursor = (questionNumber === 1) ? 'not-allowed' : 'pointer';
+
+            updateSubmitButton();
+        }
+
+        function showPreviousQuestion() {
+            const activeQuestionNumber = parseInt(document.querySelector('.active-question').id.match(/\d+/)[0]);
+
+            const previousQuestionNumber = activeQuestionNumber > 1 ? activeQuestionNumber - 1 : 1;
+            showQuestion(previousQuestionNumber);
+
+            const prevButton = document.getElementById('prev');
+            prevButton.classList.toggle('disabled', previousQuestionNumber === 1);
+            prevButton.style.cursor = (previousQuestionNumber === 1) ? 'not-allowed' : 'pointer';
+        }
+
+        function skipQuestion() {
+            const activeQuestionNumber = parseInt(document.querySelector('.active-question').id.match(/\d+/)[0]);
+
+            const nextQuestionNumber = activeQuestionNumber < totalQuestions ? activeQuestionNumber + 1 : 1;
+            showQuestion(nextQuestionNumber);
+
+            const skipButton = document.getElementById('skip');
+            skipButton.classList.toggle('disabled', nextQuestionNumber === totalQuestions);
+            skipButton.style.cursor = (nextQuestionNumber === totalQuestions) ? 'not-allowed' : 'pointer';
+
+            if (nextQuestionNumber === 1) {
+                alert('You have reached the end of the questions.');
+            }
+
+            updateSubmitButton();
+        }
+
+        function markQuestion() {
+            const activeQuestionNumber = parseInt(document.querySelector('.active-question').id.match(/\d+/)[0]);
+
+            const questionBox = document.getElementById(`questionBox${activeQuestionNumber}`);
+            const isMarked = questionBox.classList.toggle('marked-question');
+
+            markedQuestions = document.querySelectorAll('.marked-question').length;
+
+            updateProgressBar();
+
+            const markButton = document.querySelector('.navigationButton:nth-child(2)');
+            markButton.textContent = isMarked ? 'Remove Mark' : 'Mark as Corrected';
+
+            if (isMarked) {
+                for (let i = 1; i <= totalQuestions; i++) {
+                    const nextQuestionBox = document.getElementById(`questionBox${i}`);
+                    if (!nextQuestionBox.classList.contains('marked-question')) {
+                        showQuestion(i);
+                        return;
+                    }
+                }
+            }
+
+            updateSubmitButton();
+        }
+
+        function updateProgressBar() {
+            const progressBar = document.getElementById('progressBar');
+            const progress = (markedQuestions / totalQuestions) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        function selectAnswer(div, userAnswer) {
+            var options = document.querySelectorAll('.option');
+            options.forEach(function(opt) {
+                opt.classList.remove('selected');
+            });
+
+            div.classList.add('selected');
+        }
+
+        function updateSubmitButton() {
+            const progressBar = document.getElementById('progressBar');
+            const progress = (markedQuestions / totalQuestions) * 100;
+
+            const submitButton = document.getElementById('submit');
+            submitButton.classList.toggle('disabled', progress !== 100);
+            submitButton.style.cursor = (progress !== 100) ? 'not-allowed' : 'pointer';
+        }
+
+        function checkSubmit() {
+            const progressBar = document.getElementById('progressBar');
+            const progress = (markedQuestions / totalQuestions) * 100;
+
+            if (markedQuestions === totalQuestions) {
+                alert('Your answers have been submitted successfully!');
+            } else {
+                alert('Please complete all marked questions before submitting.');
+            }
+        }
+
+        function openPDF() {
+            var pdfUrl = '/Assets/blank.pdf';
+            window.open(pdfUrl, '_blank');
+        }
+
+        function openPdf() {    
+            var pdfPath = 'rubric.pdf';
+            window.open(pdfPath, '_blank');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            showQuestion(1);
+        });
+    </script>
+</body>
+
+</html>

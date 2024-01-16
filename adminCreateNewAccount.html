@@ -1,0 +1,75 @@
+<html>
+	<head>
+		<script src="admin.js"></script>
+	</head>
+	
+    <body>
+        <div class="content">
+			<button class="admin-expand" onclick="expandSidebar()">=&gt</button>
+			
+            <div class="sidebar">
+				<button class="admin-collapse" onclick="collapseSidebar()">X</button>
+				
+				<div class="admin-btns">
+					<a href="adminCreateNewAccount.html"><button>Create New Account</button></a>
+					<a href="adminViewStudentAccounts.html"><button>View Student Accounts</button></a>
+					<a href="adminViewLecturerAccounts.html"><button>View Examiner Accounts</button></a>
+					<a href="adminCreateNewGroup.html"><button>Create New Group</button></a>
+					<a href="adminViewGroups.html"><button>View Groups</button></a>
+				</div>
+			</div>
+			
+			<div class="admin-workspace">
+				<div class="admin-form">
+					<div class="account-type">
+						<label for="accountType">Account Type:</label>
+						
+						<select id="accountType" name="account-type">
+							<option value="student">Student</option>
+							<option value="lecturer">Examiner</option>
+						</select>
+					</div>
+					
+					<input class="logInField" id="admin-form-title" placeholder="Title">
+					
+					<input class="logInField" id="admin-form-name" placeholder="Name">
+					
+					<input class="logInField" id="admin-form-surname" placeholder="Surname">
+					
+					<input class="logInField" id="admin-form-email" placeholder="Email">
+					
+					<input class="logInField" id="admin-form-pass" placeholder="Password">
+					
+					<p id="account-created"></p>
+					<button id="admin-form-button" onclick="createAccount()">Create New Account</button>
+                </div>
+            </div>
+        </div>
+		
+		<script>
+			function collapseSidebar(){
+				document.getElementsByClassName("sidebar")[0].style.display = "none";
+				
+				document.getElementsByClassName("admin-expand")[0].style.display = "block";
+			}
+			
+			function expandSidebar(){
+				document.getElementsByClassName("sidebar")[0].style.display = "block";
+				
+				document.getElementsByClassName("admin-expand")[0].style.display = "none";
+			}
+			
+			function createAccount(){
+				var text = document.getElementById("account-created");
+				text.innerText = "Account Successfully Created!";
+				
+				var fields = document.getElementsByTagName("input");
+				for(var i=0; i < fields.length; i++) {
+				  if (fields[i].type == "text") {
+					fields[i].value = "";
+				  }
+				}
+			}
+		</script>
+    </body>
+</html>

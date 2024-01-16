@@ -1,0 +1,221 @@
+<html>
+	<head>
+		<script src="admin.js"></script>
+	</head>
+	
+    <body>
+        <div class="content">
+			<button class="admin-expand" onclick="expandSidebar()">=&gt</button>
+			
+            <div class="sidebar">
+				<button class="admin-collapse" onclick="collapseSidebar()">X</button>
+				
+				<div class="admin-btns">
+					<a href="adminCreateNewAccount.html"><button>Create New Account</button></a>
+					<a href="adminViewStudentAccounts.html"><button>View Student Accounts</button></a>
+					<a href="adminViewLecturerAccounts.html"><button>View Examiner Accounts</button></a>
+					<a href="adminCreateNewGroup.html"><button>Create New Group</button></a>
+					<a href="adminViewGroups.html"><button>View Groups</button></a>
+				</div>
+			</div>
+			
+			<div class="admin-workspace">
+				<div class="create-group">
+					<input class="logInField" id="admin-group-name" placeholder="Group name">
+					
+					<input class="logInField" id="admin-group-id" placeholder="Group ID">
+					
+					<div class="add-dropdown">
+						<label>Chosen Students:</label>
+						
+						<div class="group-dropdown">
+							<button class="group-dropbtn" id="student-dropbtn" onclick="showStudentsDropdown()">Add student...</button>
+							<div id="student-dropdown" class="group-dropdown-content">
+								<input type="text" placeholder="Search.." class="logInField" id="student-search" onkeyup="filterStudents()">
+								<a href="#1" onclick="addIndividual(1)">Marty McFly, marty.mcfly.24</a>
+								<a href="#1" onclick="addIndividual(2)">James Mizzi, james.mizzi.22</a>
+								<a href="#2" onclick="addIndividual(3)">Neville Grech, neville.grech.22</a>
+								<a href="#3" onclick="addIndividual(4)">Peter Paul Buttigieg, peter.buttigieg.22</a>
+								<a href="#4" onclick="addIndividual(5)">Charlon Curmi, charlon.curmi.22</a>
+								<a href="#5" onclick="addIndividual(6)">Jeremy Grima, jeremy.grima.22</a>
+							</div>
+						</div>
+						
+						<div class="chosen-list">
+							<div class="individual">
+								<h3>Marty McFly</h3>
+								<p>marty.mcfly.24@um.edu.mt</p>
+								<button class="half-box-button" onclick="deleteIndividual(1)">Remove</button>
+							</div>
+							
+							<div class="individual">
+								<h3>James Mizzi</h3>
+								<p>james.mizzi.22@um.edu.mt</p>
+								<button class="half-box-button" onclick="deleteIndividual(2)">Remove</button>
+							</div>
+							
+							<div class="individual">
+								<h3>Neville Grech</h3>
+								<p>neville.grech.22@um.edu.mt</p>
+								<button class="half-box-button" onclick="deleteIndividual(3)">Remove</button>
+							</div>
+							
+							<div class="individual">
+								<h3>Peter Paul Buttigieg</h3>
+								<p>peter.buttigieg.22@um.edu.mt</p>
+								<button class="half-box-button" onclick="deleteIndividual(4)">Remove</button>
+							</div>
+							
+							<div class="individual">
+								<h3>Charlon Curmi</h3>
+								<p>charlon.curmi.22@um.edu.mt</p>
+								<button class="half-box-button" onclick="deleteIndividual(5)">Remove</button>
+							</div>
+							
+							<div class="individual">
+								<h3>Jeremy Grima</h3>
+								<p>jeremy.grima.22@um.edu.mt</p>
+								<button class="half-box-button" onclick="deleteIndividual(6)">Remove</button>
+							</div>
+						</div>
+					</div>
+					
+					<div class="add-dropdown">
+						<label>Chosen Examiners:</label>
+						
+						<div class="group-dropdown">
+							<button class="group-dropbtn" id="lecturer-dropbtn" onclick="showLecturersDropdown()">Add examiner...</button>
+							<ul id="lecturer-dropdown" class="group-dropdown-content">
+								<input type="text" placeholder="Search.." class="logInField" id="lecturer-search" onkeyup="filterLecturers()">
+								<a href="#6" onclick="addIndividual(7)">Dr Chris Porter, chris.porter</a>
+								<a href="#7" onclick="addIndividual(8)">Dr Colin Layfield, colin.layfield</a>
+								<a href="#8" onclick="addIndividual(9)">Dr Joseph Vella, joseph.vella</a>
+								<a href="#9" onclick="addIndividual(10)">Mr Chris Colombo, chris.colombo</a>
+							</ul>
+						</div>
+						
+						<div class="chosen-list">
+							<div class="individual">
+								<h3>Dr Chris Porter</h3>
+								<p>chris.porter@um.edu.mt</p>
+								<button class="half-box-button" onclick="deleteIndividual(7)">Remove</button>
+							</div>
+							
+							<div class="individual">
+								<h3>Dr Colin Layfield</h3>
+								<p>colin.layfield@um.edu.mt</p>
+								<button class="half-box-button" onclick="deleteIndividual(8)">Remove</button>
+							</div>
+							
+							<div class="individual">
+								<h3>Dr Joseph Vella</h3>
+								<p>joseph.vella@um.edu.mt</p>
+								<button class="half-box-button" onclick="deleteIndividual(9)">Remove</button>
+							</div>
+							
+							<div class="individual">
+								<h3>Mr Chris Colombo</h3>
+								<p>chris.colombo@um.edu.mt</p>
+								<button class="half-box-button" onclick="deleteIndividual(10)">Remove</button>
+							</div>
+						</div>
+					</div>
+					
+					<p id="group-created"></p>
+					<button id="admin-group-button" onclick="createGroup()">Create New Group</button>
+				</div>
+            </div>
+        </div>
+		
+		<script>
+			function collapseSidebar(){
+				document.getElementsByClassName("sidebar")[0].style.display = "none";
+				
+				document.getElementsByClassName("admin-expand")[0].style.display = "block";
+			}
+			
+			function expandSidebar(){
+				document.getElementsByClassName("sidebar")[0].style.display = "block";
+				
+				document.getElementsByClassName("admin-expand")[0].style.display = "none";
+			}
+			
+			function showStudentsDropdown(){
+				document.getElementById("student-dropdown").classList.toggle("show");
+			}
+			
+			function showLecturersDropdown(){
+				document.getElementById("lecturer-dropdown").classList.toggle("show");
+			}
+			
+			function filterStudents(){
+				var input, filter, ul, li, a, i;
+				
+				input = document.getElementById("student-search");
+				
+				filter = input.value.toUpperCase();
+				
+				div = document.getElementById("student-dropdown");
+				
+				a = div.getElementsByTagName("a");
+				
+				for (i = 0; i < a.length; i++){
+					txtValue = a[i].textContent || a[i].innerText;
+					
+					if (txtValue.toUpperCase().indexOf(filter) > -1){
+						a[i].style.display = "";
+					} else{
+						a[i].style.display = "none";
+					}
+				}	
+			}
+			
+			function filterLecturers(){
+				var input, filter, ul, li, a, i;
+				
+				input = document.getElementById("lecturer-search");
+				
+				filter = input.value.toUpperCase();
+				
+				div = document.getElementById("lecturer-dropdown");
+				
+				a = div.getElementsByTagName("a");
+				
+				for (i = 0; i < a.length; i++){
+					txtValue = a[i].textContent || a[i].innerText;
+					
+					if (txtValue.toUpperCase().indexOf(filter) > -1){
+						a[i].style.display = "";
+					} else{
+						a[i].style.display = "none";
+					}
+				}	
+			}
+			
+			function addIndividual(id){
+				document.getElementsByClassName("individual")[id-1].style.display = "flex";
+			}
+			
+			function deleteIndividual(id){
+				document.getElementsByClassName("individual")[id-1].style.display = "none";
+			}
+			
+			function createGroup(){
+				var text = document.getElementById("group-created");
+				text.innerText = "Group Successfully Created!";
+				
+				var fields = document.getElementsByTagName("input");
+				for(var i=0; i<fields.length; i++){
+				  if (fields[i].type == "text"){
+					fields[i].value = "";
+				  }
+				}
+				
+				var individuals = document.getElementsByClassName("individual");
+				for(var i=0; i<individuals.length; i++){
+					individuals[i].style.display = "none";
+				}
+			}
+		</script>
+    </body>
+</html>

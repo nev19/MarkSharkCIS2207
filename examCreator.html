@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+    <script src="lecturer.js"></script>
+</head>
+
+<body>
+    <div class="content">
+        <div class="sidebar">
+            <div class="titleBox">Questions
+                <label class="shuffleCheckboxLabel">
+                    <p style="font-size: small;"><input type="checkbox" id="shuffleCheckbox">Shuffle</p>
+                </label>
+            </div>
+            <div id="questionList"></div>
+            <button id="addQuestionBtn">+</button>
+        </div>
+        <div class="workspace">
+            <div class="workspaceBar">
+                <div class="timeBox" id="countdown">
+                    <input type="text" class="timeInput" placeholder="Duration" pattern="[0-9:]+" maxlength="4">
+                </div>
+                <select class="groupDropdown">
+                    <option value="" disabled selected>Choose Group</option>
+                    <option value="CIS4545">CIS4545: Programming in Python</option>
+                    <option value="CIS1234">CIS1234: Principles of OOP</option>
+                    <option value="CIS4567">CIS4567: Introduction to Databases</option>
+                </select>
+                <button class="examViewButton" onclick="uploadRubric()">Upload Rubric</button>
+            </div>
+            <div class="workspaceMain">
+                <!-- Questions will be dynamically added here -->
+            </div>
+            <div class="workspaceBar">
+                <button class="examViewButton" onclick="deleteQuestion()">Delete</button>
+                <button class="examViewButton save-and-quit">Save and Quit</button>
+                <button class="examViewButton" id="submit" onclick="checkSubmit()">Submit for Review</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        CKEDITOR.replace('editor');
+
+        let totalQuestions = 1;
+
+        function generateQuestionBoxes() {
+            const questionList = document.getElementById('questionList');
+            const workspaceMain = document.querySelector('.workspaceMain');
+
+            const questionNumber = totalQuestions;
+            const questionBox = document.createElement('div');
+            questionBox.className = 'questionBox';
+            questionBox.textContent = `New Question`;
+            questionBox.onclick = () => showQuestion(questionNumber);
+            questionList.appendChild(questionBox);
+
+            const questionContent = document.createElement('div');
+            questionContent.className = 'question';
+            questionContent.id = `question${questionNumber}`;
+            questionContent.innerHTML = `
+                <div class="SectionMarker">
+                    <input type="text" class="questionInput" placeholder="Enter Question Here" oninput="updateQuestionBoxContent(${questionNumber}, this.value)">
+                    <div class="dropdown">
+                        <select class="dropbtn" id="dropdown${questionNumber}" onchange="handleDropdownChange(${questionNumber}, this.value)">
+                            <option class="dropdown-content" value="" disabled selected>Question Type</option>
+                            <option class="dropdown-content" value="option2">Text Answer</option>
+                            <option class="dropdown-content" value="option3">Multiple Choice</option>
+                            <option class="dropdown-content" value="option4">True/False</option>
+                            <option class="dropdown-content" value="option5">External Upload</option>
+                        </select>
+                    </div>
+                    <div class="marks">
+                        <input type="text" class="transparentTextField" maxlength="2"> Marks
+                    </div>
+                </div>
+                <div class="dynamicContent" id="dynamicContent${questionNumber}"></div>
+            `;
+
+            workspaceMain.appendChild(questionContent);
+
+            CKEDITOR.replace(`editor${questionNumber}`);
+        }
+
+        function handleDropdownChange(questionNumber, selectedOption) {
+            const dynamicContent = document.getElementById(`dynamicContent${questionNumber}`);
+
+            dynamicContent.innerHTML = '';
+
+            switch (selectedOption) {
+                case 'option1':
+                    CKEDITOR.replace(`editor${questionNumber}`);
+                    break;
+                case 'option2':
+                    const ckEditorDiv = document.createElement('div');
+                    const ckEditorId = `editor${questionNumber}_unique${Date.now()}`;
+                    ckEditorDiv.id = ckEditorId;
+                    dynamicContent.appendChild(ckEditorDiv);
+                    CKEDITOR.replace(ckEditorId);
+                    break;
+                case 'option3':
+                    const multipleOptionsContainer = document.createElement('div');
+                    multipleOptionsContainer.className = 'multipleOptionsContainer';
+
+                    for (let i = 1; i <= 4; i++) {
+                        const optionContainer = document.createElement('div');
+                        optionContainer.className = 'optionscontainer';
+
+                        const textField = document.createElement('input');
+                        textField.type = 'text';
+                        textField.className = 'logInField';
+                        textField.placeholder = `Text ${i}`;
+
+                        const checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        checkbox.className = 'checkbox';
+
+                        optionContainer.appendChild(textField);
+                        optionContainer.appendChild(checkbox);
+
+                        multipleOptionsContainer.appendChild(optionContainer);
+                    }
+
+                    dynamicContent.appendChild(multipleOptionsContainer);
+                    break;
+                case 'option4':
+                    const optionsContainer = document.createElement('div');
+                    optionsContainer.className = 'options-container';
+                    const trueOption = document.createElement('div');
+                    trueOption.className = 'option';
+                    trueOption.textContent = 'True';
+                    trueOption.onclick = function () {
+                        selectAnswer(this, true);
+                    };
+                    const falseOption = document.createElement('div');
+                    falseOption.className = 'option';
+                    falseOption.textContent = 'False';
+                    falseOption.onclick = function () {
+                        selectAnswer(this, false);
+                    };
+                    optionsContainer.appendChild(trueOption);
+                    optionsContainer.appendChild(falseOption);
+                    dynamicContent.appendChild(optionsContainer);
+                    break;
+                case 'option5':
+                    const option5Content = document.createElement('div');
+                    option5Content.innerHTML = '<div class="options-container">Student will be given .pdf upload tools</div>';
+                    dynamicContent.appendChild(option5Content);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        function selectAnswer(div, userAnswer) {
+            var options = document.querySelectorAll('.option');
+            options.forEach(function(opt) {
+                opt.classList.remove('selected');
+            });
+
+            div.classList.add('selected');
+        }
+
+        function showQuestion(questionNumber) {
+
+            const workspaceMain = document.querySelector('.workspaceMain');
+            const allQuestions = workspaceMain.querySelectorAll('.question');
+            allQuestions.forEach(question => {
+                question.style.display = 'none';
+            });
+
+
+            const selectedQuestion = document.getElementById(`question${questionNumber}`);
+            if (selectedQuestion) {
+                selectedQuestion.style.display = 'block';
+            }
+
+            const questionBoxes = document.querySelectorAll('.questionBox');
+            questionBoxes.forEach((questionBox, index) => {
+                if (index + 1 === questionNumber) {
+                    questionBox.classList.add('active-question');
+                } else {
+                    questionBox.classList.remove('active-question');
+                }
+            });
+        }
+
+        function updateQuestionBoxContent(questionNumber, value) {
+            const sidebarQuestionBox = document.querySelector(`.questionBox:nth-child(${questionNumber})`);
+            if (sidebarQuestionBox) {
+                sidebarQuestionBox.textContent = `${value}`;
+            }
+        }
+
+        function deleteQuestion() {
+            const questionList = document.getElementById('questionList');
+            const activeQuestionBox = document.querySelector('.questionBox.active-question');
+
+            if (questionList.children.length === 1) {
+
+                alert("You cannot delete the last question.");
+                return;
+            }
+
+            if (activeQuestionBox) {
+                const questionNumberToDelete = Array.from(questionList.children).indexOf(activeQuestionBox) + 1;
+                const questionContentToRemove = document.getElementById(`question${questionNumberToDelete}`);
+
+                if (activeQuestionBox) {
+                    activeQuestionBox.style.display = 'none';
+                }
+
+                if (questionContentToRemove) {
+                    questionContentToRemove.remove();
+                }
+            }
+        }
+
+        function showPreviousQuestion() {
+            const activeQuestionNumber = parseInt(document.querySelector('.active-question').id.match(/\d+/)[0]);
+
+            const previousQuestionNumber = activeQuestionNumber > 1 ? activeQuestionNumber - 1 : 1;
+            showQuestion(previousQuestionNumber);
+
+            const prevButton = document.getElementById('prev');
+            prevButton.classList.toggle('disabled', previousQuestionNumber === 1);
+            prevButton.style.cursor = (previousQuestionNumber === 1) ? 'not-allowed' : 'pointer';
+        }
+
+        function skipQuestion() {
+            const activeQuestionNumber = parseInt(document.querySelector('.active-question').id.match(/\d+/)[0]);
+
+            const nextQuestionNumber = activeQuestionNumber < totalQuestions ? activeQuestionNumber + 1 : 1;
+            showQuestion(nextQuestionNumber);
+
+            const skipButton = document.getElementById('skip');
+            skipButton.classList.toggle('disabled', nextQuestionNumber === totalQuestions);
+            skipButton.style.cursor = (nextQuestionNumber === totalQuestions) ? 'not-allowed' : 'pointer';
+
+            if (nextQuestionNumber === 1) {
+                alert('You have reached the end of the questions.');
+            }
+
+            updateSubmitButton();
+        }
+
+        function uploadRubric() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.pdf';
+
+            input.addEventListener('change', function () {
+                const file = this.files[0];
+                const uploadButton = document.querySelector('.examViewButton');
+
+                if (file) {
+                    uploadButton.textContent = file.name;
+                    alert(`File "${file.name}" has been selected.`);
+                } else {
+                    uploadButton.textContent = 'Upload Rubric';
+                    alert('No file selected.');
+                }
+            });
+
+            input.click();
+        }
+
+        function checkSubmit() {
+            const confirmSubmission = confirm("Are you sure you want to submit the paper for review?");
+            
+            if (confirmSubmission) {
+                alert("The paper has been submitted to the administration for review.");
+
+                setTimeout(function () {
+                    window.location.href = "lecturerDashboard.html";
+                }, 500);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            generateQuestionBoxes();
+
+            const questionBoxes = document.querySelectorAll('.questionBox');
+            questionBoxes.forEach((questionBox, index) => {
+                questionBox.addEventListener('click', () => {
+                    showQuestion(index + 1); 
+                });
+            });
+
+            document.querySelector('.navigationButton.delete').addEventListener('click', deleteQuestion);
+        });
+
+        document.querySelector('.examViewButton.save-and-quit').addEventListener('click', function () {
+            window.location.href = "lecturerDashboard.html";
+        });
+
+        document.getElementById('addQuestionBtn').addEventListener('click', () => {
+            totalQuestions++;
+            generateQuestionBoxes();
+            showQuestion(totalQuestions);
+        });
+    </script>
+</body>
+
+</html>

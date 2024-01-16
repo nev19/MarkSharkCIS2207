@@ -1,0 +1,106 @@
+<html>
+	<head>
+		<script src="admin.js"></script>
+	</head>
+	
+    <body>
+        <div class="content">
+			<button class="admin-expand" onclick="expandSidebar()">=&gt</button>
+			
+            <div class="sidebar">
+				<button class="admin-collapse" onclick="collapseSidebar()">X</button>
+				
+				<div class="admin-btns">
+					<a href="adminCreateNewAccount.html"><button>Create New Account</button></a>
+					<a href="adminViewStudentAccounts.html"><button>View Student Accounts</button></a>
+					<a href="adminViewLecturerAccounts.html"><button>View Examiner Accounts</button></a>
+					<a href="adminCreateNewGroup.html"><button>Create New Group</button></a>
+					<a href="adminViewGroups.html"><button>View Groups</button></a>
+				</div>
+			</div>
+			
+			<div class="admin-workspace">
+				<div class="current-groups">
+					<label>Current Groups:</label>
+					
+					<div class = "half-box-container">
+						<div class="half-box">
+							<h2>Introduction to Databases</h2><br>
+							<p> Group ID: <strong>CIS4567_2024</strong><br>
+							</p>
+							<a class="half-box-button" href="adminViewGroup.html?g=cis4567_2024">
+								<button class="view-group">
+									<h2>View</h2>
+								</button>
+							</a>
+							<button class="half-box-button" onclick="deleteGroup(1)">
+								<h2>Delete</h2>
+							</button>
+						</div>
+						
+						<div class="half-box">
+							<h2>Mathematics of Discrete Structures</h2>
+							<p> Group ID: <strong>CPS1111_2024</strong><br>
+							</p>
+							<a class="half-box-button" href="adminViewGroup.html?g=cps1111_2024">
+								<button class="view-group">
+									<h2>View</h2>
+								</button>
+							</a>
+							<button class="half-box-button" onclick="deleteGroup(2)">
+								<h2>Delete</h2>
+							</button>
+						</div>
+						
+						<div class="half-box">
+							<h2>Applications of Web Architecture</h2>
+							<p> Group ID: <strong>CIS5995_2024</strong><br>
+							</p>
+							<a class="half-box-button" href="adminViewGroup.html?g=cis5995_2024">
+								<button class="view-group">
+									<h2>View</h2>
+								</button>
+							</a>
+							<button class="half-box-button" onclick="deleteGroup(3)">
+								<h2>Delete</h2>
+							</button>
+						</div>
+						
+						<div class="half-box">
+							<h2>Principles of OOP</h2><br>
+							<p> Group ID: <strong>CIS1234_2024</strong><br>
+							</p>
+							<a class="half-box-button" href="adminViewGroup.html?g=cis1234_2024">
+								<button class="view-group">
+									<h2>View</h2>
+								</button>
+							</a>
+							<button class="half-box-button" onclick="deleteGroup(4)">
+								<h2>Delete</h2>
+							</button>
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+		
+		<script>
+			function collapseSidebar(){
+				document.getElementsByClassName("sidebar")[0].style.display = "none";
+				
+				document.getElementsByClassName("admin-expand")[0].style.display = "block";
+			}
+			
+			function expandSidebar(){
+				document.getElementsByClassName("sidebar")[0].style.display = "block";
+				
+				document.getElementsByClassName("admin-expand")[0].style.display = "none";
+			}
+			
+			function deleteGroup(id){
+				alert("Are you sure you want to delete the group?");
+				document.getElementsByClassName("half-box")[id-1].style.display = "none";
+			}
+		</script>
+    </body>
+</html>

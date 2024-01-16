@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="student.js"></script>
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+</head>
+
+<body>
+    <div class="content">
+        <div class="sidebar">
+            <div class="titleBox">Questions</div>
+        </div>
+        <div class="workspace">
+            <div class="workspaceBar">
+                <div class="timeBox">30/01/2024 3hrs</div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar">Progress</div>
+                </div>
+                <button class="examViewButton" onclick="openPdf()">View Rubric</button>
+            </div>
+            <div class="workspaceMain">
+                Please Come Back Later
+            </div>
+            <div class="workspaceBar">
+                <div class="navigationButtonContainer">
+                    <button class="navigationButton disabled" id="prev" onclick="showPreviousQuestion()">Prev</button>
+                    <button class="navigationButton disabled" onclick="markQuestion()">Mark as Done</button>
+                    <button class="navigationButton disabled" id="skip" onclick="skipQuestion()">Next</button>
+                </div>
+                <button class="examViewButton disabled" id="submit" onclick="checkSubmit()">Submit</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        CKEDITOR.replace('editor');
+
+        const totalQuestions = 4;
+        let markedQuestions = 0;
+
+        function showQuestion(questionNumber) {
+            document.querySelectorAll('.question').forEach(question => {
+                question.style.display = 'none';
+            });
+
+            document.getElementById(`question${questionNumber}`).style.display = 'block';
+
+            document.querySelectorAll('.questionBox').forEach(box => {
+                box.classList.remove('active-question');
+            });
+            document.getElementById(`questionBox${questionNumber}`).classList.add('active-question');
+
+            const markButton = document.querySelector('.navigationButton:nth-child(2)');
+            const currentQuestionBox = document.getElementById(`questionBox${questionNumber}`);
+            markButton.textContent = currentQuestionBox.classList.contains('marked-question') ? 'Remove Mark' : 'Mark as Done';
+
+            const skipButton = document.getElementById('skip');
+            skipButton.classList.toggle('disabled', questionNumber === totalQuestions);
+            skipButton.style.cursor = (questionNumber === totalQuestions) ? 'not-allowed' : 'pointer';
+
+            const prevButton = document.getElementById('prev');
+            prevButton.classList.toggle('disabled', questionNumber === 1);
+            prevButton.style.cursor = (questionNumber === 1) ? 'not-allowed' : 'pointer';
+
+            updateSubmitButton();
+        }
+
+        function showPreviousQuestion() {
+            const activeQuestionNumber = parseInt(document.querySelector('.active-question').id.match(/\d+/)[0]);
+
+            const previousQuestionNumber = activeQuestionNumber > 1 ? activeQuestionNumber - 1 : 1;
+            showQuestion(previousQuestionNumber);
+
+            const prevButton = document.getElementById('prev');
+            prevButton.classList.toggle('disabled', previousQuestionNumber === 1);
+            prevButton.style.cursor = (previousQuestionNumber === 1) ? 'not-allowed' : 'pointer';
+        }
+
+        function skipQuestion() {
+            const activeQuestionNumber = parseInt(document.querySelector('.active-question').id.match(/\d+/)[0]);
+
+            const nextQuestionNumber = activeQuestionNumber < totalQuestions ? activeQuestionNumber + 1 : 1;
+            showQuestion(nextQuestionNumber);
+
+            const skipButton = document.getElementById('skip');
+            skipButton.classList.toggle('disabled', nextQuestionNumber === totalQuestions);
+            skipButton.style.cursor = (nextQuestionNumber === totalQuestions) ? 'not-allowed' : 'pointer';
+
+            if (nextQuestionNumber === 1) {
+                alert('You have reached the end of the questions.');
+            }
+
+            updateSubmitButton();
+        }
+
+        function markQuestion() {
+            const activeQuestionNumber = parseInt(document.querySelector('.active-question').id.match(/\d+/)[0]);
+
+            const questionBox = document.getElementById(`questionBox${activeQuestionNumber}`);
+            const isMarked = questionBox.classList.toggle('marked-question');
+
+            markedQuestions = document.querySelectorAll('.marked-question').length;
+
+            updateProgressBar();
+
+            const markButton = document.querySelector('.navigationButton:nth-child(2)');
+            markButton.textContent = isMarked ? 'Remove Mark' : 'Mark as Done';
+
+            if (isMarked) {
+                for (let i = 1; i <= totalQuestions; i++) {
+                    const nextQuestionBox = document.getElementById(`questionBox${i}`);
+                    if (!nextQuestionBox.classList.contains('marked-question')) {
+                        showQuestion(i);
+                        return;
+                    }
+                }
+            }
+
+            updateSubmitButton();
+        }
+
+        function updateProgressBar() {
+            const progressBar = document.getElementById('progressBar');
+            const progress = (markedQuestions / totalQuestions) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        const countdownElement = document.getElementById('countdown');
+        let countdownTime = 2 * 60 * 60;
+
+        function formatTime(time) {
+            return time < 10 ? `0${time}` : time;
+        }
+
+        function updateCountdown() {
+            const hours = Math.floor(countdownTime / 3600);
+            const minutes = Math.floor((countdownTime % 3600) / 60);
+            const seconds = countdownTime % 60;
+
+            const formattedHours = formatTime(hours);
+            const formattedMinutes = formatTime(minutes);
+            const formattedSeconds = formatTime(seconds);
+
+            countdownElement.textContent = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+
+            if (countdownTime > 0) {
+                countdownTime--;
+                setTimeout(updateCountdown, 1000);
+            } else {
+                countdownElement.textContent = "Time's up!";
+            }
+        }
+
+        updateCountdown();
+
+        function selectAnswer(div, userAnswer) {
+            var options = document.querySelectorAll('.option');
+            options.forEach(function(opt) {
+                opt.classList.remove('selected');
+            });
+
+            div.classList.add('selected');
+        }
+
+        function updateSubmitButton() {
+            const progressBar = document.getElementById('progressBar');
+            const progress = (markedQuestions / totalQuestions) * 100;
+
+            const submitButton = document.getElementById('submit');
+            submitButton.classList.toggle('disabled', progress !== 100);
+            submitButton.style.cursor = (progress !== 100) ? 'not-allowed' : 'pointer';
+        }
+
+        function checkSubmit() {
+            const progressBar = document.getElementById('progressBar');
+            const progress = (markedQuestions / totalQuestions) * 100;
+
+            if (markedQuestions === totalQuestions) {
+                alert('Your answers have been submitted successfully!');
+            } else {
+                alert('Please complete all marked questions before submitting.');
+            }
+        }
+
+        function handleFileUpload() {
+            const pdfUploadInput = document.querySelector('.pdfUpload');
+            const viewButton = document.getElementById('viewButton');
+            const removeButton = document.getElementById('removeButton');
+
+            if (pdfUploadInput.files.length > 0) {
+                viewButton.removeAttribute('disabled');
+                removeButton.removeAttribute('disabled');
+            } else {
+                viewButton.setAttribute('disabled', true);
+                removeButton.setAttribute('disabled', true);
+            }
+        }
+
+        function removeFile() {
+            const pdfUploadInput = document.querySelector('.pdfUpload');
+            const viewButton = document.getElementById('viewButton');
+            const removeButton = document.getElementById('removeButton');
+
+            pdfUploadInput.value = null;
+            viewButton.setAttribute('disabled', true);
+            removeButton.setAttribute('disabled', true);
+        }
+
+        function viewFile() {
+            const pdfUploadInput = document.querySelector('.pdfUpload');
+
+            if (pdfUploadInput.files.length > 0) {
+                const pdfFile = pdfUploadInput.files[0];
+                const fileURL = URL.createObjectURL(pdfFile);
+                window.open(fileURL, '_blank');
+            }
+        }
+
+        function selectMultipleAnswers(option) {
+            option.classList.toggle('selected');
+        }
+
+        function openPdf() {    
+            var pdfPath = 'rubric.pdf';
+            window.open(pdfPath, '_blank');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            showQuestion(1);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+<html>
+	<head>
+		<script src="admin.js"></script>
+	</head>
+	
+    <body>
+        <div class="content">
+			<button class="admin-expand" onclick="expandSidebar()">=&gt</button>
+			
+            <div class="sidebar">
+				<button class="admin-collapse" onclick="collapseSidebar()">X</button>
+				
+				<div class="admin-btns">
+					<a href="adminCreateNewAccount.html"><button>Create New Account</button></a>
+					<a href="adminViewStudentAccounts.html"><button>View Student Accounts</button></a>
+					<a href="adminViewLecturerAccounts.html"><button>View Examiner Accounts</button></a>
+					<a href="adminCreateNewGroup.html"><button>Create New Group</button></a>
+					<a href="adminViewGroups.html"><button>View Groups</button></a>
+				</div>
+			</div>
+			
+			<div class="admin-workspace">
+				<div class="current-lecturers">
+					<label>Current Examiners:</label>
+					
+					<div class = "half-box-container">
+						<div class="half-box">
+							<h2>Dr Chris Porter</h2>
+							<p> Email: <strong>chris.porter@um.edu.mt</strong><br>
+							</p>
+							<a class="half-box-button" href="editIndividual.html?i=7">
+								<button class="edit-account">
+									<h2>Edit</h2>
+								</button>
+							</a>
+							<button class="half-box-button" onclick="deleteLecturer(1)">
+								<h2>Delete</h2>
+							</button>
+						</div>
+						
+						<div class="half-box">
+							<h2>Dr Colin Layfield</h2>
+							<p> Email: <strong>colin.layfield@um.edu.mt</strong><br>
+							</p>
+							<a class="half-box-button" href="editIndividual.html?i=8">
+								<button class="edit-account">
+									<h2>Edit</h2>
+								</button>
+							</a>
+							<button class="half-box-button" onclick="deleteLecturer(2)">
+								<h2>Delete</h2>
+							</button>
+						</div>
+						
+						<div class="half-box">
+							<h2>Dr Joseph Vella</h2>
+							<p> Email: <strong>joseph.vella@um.edu.mt</strong><br>
+							</p>
+							<a class="half-box-button" href="editIndividual.html?i=9">
+								<button class="edit-account">
+									<h2>Edit</h2>
+								</button>
+							</a>
+							<button class="half-box-button" onclick="deleteLecturer(3)">
+								<h2>Delete</h2>
+							</button>
+						</div>
+						
+						<div class="half-box">
+							<h2>Mr Chris Colombo</h2>
+							<p> Email: <strong>chris.colombo@um.edu.mt</strong><br>
+							</p>
+							<a class="half-box-button" href="editIndividual.html?i=10">
+								<button class="edit-account">
+									<h2>Edit</h2>
+								</button>
+							</a>
+							<button class="half-box-button" onclick="deleteLecturer(4)">
+								<h2>Delete</h2>
+							</button>
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+		
+		<script>
+			function collapseSidebar(){
+				document.getElementsByClassName("sidebar")[0].style.display = "none";
+				
+				document.getElementsByClassName("admin-expand")[0].style.display = "block";
+			}
+			
+			function expandSidebar(){
+				document.getElementsByClassName("sidebar")[0].style.display = "block";
+				
+				document.getElementsByClassName("admin-expand")[0].style.display = "none";
+			}
+			
+			function deleteLecturer(id){
+				alert("Are you sure you want to delete the lecturer?");
+				document.getElementsByClassName("half-box")[id-1].style.display = "none";
+			}
+		</script>
+    </body>
+</html>

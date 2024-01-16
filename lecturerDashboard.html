@@ -1,0 +1,519 @@
+<html>
+    <head>
+        <script src="lecturer.js"></script>
+        <script src="calendar.js"></script>
+    </head>
+
+
+
+
+    <div id="popup" class="popup">
+        <div class="popup-header">
+                <h2>My Groups</h2>
+                <div id="year-button" class="dropdown">
+                    <button class="dropbtn">Year: 2024 &#x25BC</button>
+                </div>
+                <button id="cross" class="arrow">
+                    <img src="Assets/Images/cross.png" alt="Exit">
+                </button>
+        </div>
+            <div id="popup-content" class="popup-content">
+                
+                
+                <!-- Your popup content goes here -->
+                
+                <div class="groups">
+
+                    <div id="group-a" class="group">
+                        <h3>CPS1111_2024</h3>
+                        <p>
+                            
+                            <u>Examiners:</u>
+                            <br>Colombo, Chris
+                            <br>Layfield, Colin
+                            <br><br><u>Students:</u>
+                            <br>Curmi, Charlon
+                            <br>McFly, Marty
+                        </p>
+                    </div>
+
+                    <div id="group-b" class="group">
+                        <h3>CIS1234_2024</h3>
+                        <p>
+                            <u>Examiners:</u>
+                            <br>Layfield, Colin
+                            <br><br><u>Students:</u>
+                            <br>Buttigieg, Peter Paul
+                            <br>Curmi, Charlon
+                            <br>Grech, Neville
+                            <br>McFly, Marty
+                            <br>Mizzi, James
+                            
+                        </p>
+                    </div>
+
+                    <div id="group-a" class="group">
+                        <h3>CIS1553_2024</h3>
+                        <p>
+                            
+                            <u>Examiners:</u>
+							<br>Abela, John
+                            <br>Layfield, Colin
+                            <br><br><u>Students:</u>
+                            <br>Buttigieg, Peter Paul
+                            <br>McFly, Marty
+                            <br>Mizzi, James
+                        </p>
+                    </div>
+
+                    <div id="group-b" class="group">
+                        <h3>CIS1783_2024</h3>
+                        <p>
+                            
+                            <u>Examiners:</u>
+                            
+                            <br>Layfield, Colin
+							<br>Spiteri Staines, Tony
+                            <br><br><u>Students:</u>
+                            <br>Buttigieg, Peter Paul
+                            <br>Curmi, Charlon
+                            <br>Grech, Neville
+                            <br>McFly, Marty
+                            <br>Mizzi, James
+                        </p>
+                    </div>
+
+                    <div id="group-a" class="group">
+                        <h3>CIS2323_2024</h3>
+                        <p>
+                            
+                            <u>Examiners:</u>
+							<br>Guillaumier, Kristian
+                            <br>Layfield, Colin
+                            <br><br><u>Students:</u>
+                            <br>Buttigieg, Peter Paul
+                            <br>Mizzi, James
+                        </p>
+                    </div>
+                    
+                    <div id="group-b"class="group">
+                        <h3>CIS4545_2024</h3>
+                        <p>
+                            <u>Examiners:</u>
+                            <br>Layfield, Colin
+                            <br><br><u>Students:</u>
+                            <br>Buttigieg, Peter Paul
+                            <br>Curmi, Charlon
+                            <br>Grech, Neville
+                            <br>Grima, Jeremy
+                            <br>McFly, Marty
+                        </p>
+                    </div>
+                    
+                    
+                    
+                        
+                    <div id="group-a" class="group">
+
+                        <h3>CIS4567_2024</h3>
+                        <p>
+                            <u>Examiners:</u>
+                            <br>Layfield, Colin
+                            <br>Vella, Joseph
+                            <br><br><u>Students:</u>
+                            <br>Buttigieg, Peter Paul
+                            <br>Curmi, Charlon
+                            <br>Grech, Neville
+                            <br>McFly, Marty
+                            <br>Mizzi, James
+                        </p>
+                    </div>
+
+                    
+
+                    
+
+                    
+
+                    
+                </div>
+            </div>
+        
+    </div>
+
+
+
+
+    <body>
+            <div class="grid-container">
+                <div class="wide-column">
+                    <div class="title-box">
+                        <h1>Welcome, Dr Layfield</h1>
+                        <h2>You have 4 upcoming exams</h2><br>
+                    </div>
+    
+                    
+    
+
+
+
+
+
+
+
+                    <div class="box">
+                        <h2>Work-In-Progress Exams</h2>
+                        
+                        <button class="arrow-hidden" id="hide-work">
+                            <img src="Assets/Images/down-arrow-2.png" alt="Down Arrow">
+                        </button>
+                        <button class="arrow-hidden" id="show-work">
+                            <img src="Assets/Images/left-arrow-2.png" alt="Left Arrow">
+                        </button>
+                        
+                    </div>
+    
+                    <div id="work" class="half-box-container">
+                        <div class="half-box">
+                            <h2>Programming in Python</h2>
+                            <p> Date: <strong></strong><br>
+                                Study Unit Code: <strong>CIS4545</strong><br>
+                                Duration: <strong>2 hours</strong><br>
+                                Global Mark Percentage: <strong>80%</strong><br>
+                                Examiner: <strong>Dr Colin Layfield</strong>
+                            </p>
+                            <button onclick="location.href = 'examCreator.html';" class="half-box-button">
+                                <h2>View Exam</h2>
+                            </button>
+                        </div>
+
+                        <div class="half-box" id="new">
+                            <h2>Name of Exam</h2>
+                            <p> Date: <strong></strong><br>
+                                Study Unit Code: <strong></strong><br>
+                                Duration: <strong></strong><br>
+                                Global Mark Percentage: <strong></strong><br>
+                            </p>
+                            <button onclick="location.href = 'examCreator.html';" class="half-box-button" id="new-button">
+                                <h2>Create New Exam</h2>
+                            </button>
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+
+                    <div class="box">
+                        <h2>Ongoing Exams</h2>
+                        <button class="arrow" id="hide-ongoing">
+                            <img src="Assets/Images/down-arrow-2.png" alt="Down Arrow">
+                        </button>
+                        <button class="arrow" id="show-ongoing">
+                            <img src="Assets/Images/left-arrow-2.png" alt="Left Arrow">
+                        </button>
+                    </div>
+                    <div id="ongoing" class="empty-box">
+                        <h2>Currently, you have no ongoing exams...</h2><br>
+                    </div>
+
+
+
+
+
+
+
+
+
+    
+    
+    
+    
+                    <div class="box">
+                        <h2>Upcoming Exams</h2>
+                    
+                        <button class="arrow" id="hide-upcoming">
+                            <img src="Assets/Images/down-arrow-2.png" alt="Down Arrow">
+                        </button>
+                        <button class="arrow" id="show-upcoming">
+                            <img src="Assets/Images/left-arrow-2.png" alt="Left Arrow">
+                        </button>
+                    </div>
+    
+                    <div id="upcoming" class="half-box-container">
+
+                        <div class="half-box">
+                            <h2>Principles of OOP</h2>
+                            <p> Date: <strong>17/01/2024</strong><br>
+                                Study Unit Code: <strong>CIS1234</strong><br>
+                                Duration: <strong>1.5 hours</strong><br>
+                                Global Mark Percentage: <strong>20%</strong><br>
+                                Examiner: <strong>Dr Colin Layfield</strong>
+                            </p>
+                            <button onclick="location.href = 'lecturerExamView.html';" class="half-box-button">
+                                <h2>View Exam</h2>
+                            </button>
+                        </div>
+                        <div class="half-box">
+                            <h2>Introduction to Databases</h2>
+                            <p> Date: <strong>30/01/2024</strong><br>
+                                Study Unit Code: <strong>CIS4567</strong><br>
+                                Duration: <strong>3 hours</strong><br>
+                                Global Mark Percentage: <strong>100%</strong><br>
+                                Examiner: <strong>Dr Colin Layfield, Dr Joseph Vella</strong>
+                            </p>
+                            <button onclick="location.href = 'lecturerExamView.html';" class="half-box-button">
+                                <h2>View Exam</h2>
+                            </button>
+                        </div>
+
+                        
+                        
+                        <div class="half-box">
+                            <h2>Mathematics of Discrete Structures</h2>
+                            <p> Date: <strong>05/02/2024</strong><br>
+                                Study Unit Code: <strong>CPS1111</strong><br>
+                                Duration: <strong>2 hours</strong><br>
+                                Global Mark Percentage: <strong>50%</strong><br>
+                                Examiner: <strong>Mr Chris Colombo, Dr Colin Layfield</strong>
+                            </p>
+                            <button onclick="location.href = 'lecturerExamView.html';" class="half-box-button">
+                                <h2>View Exam</h2>
+                            </button>
+                        </div>
+                        <div class="half-box">
+                            <h2>Data Structures and Algorithms</h2>
+                            <p> Date: <strong>07/02/2024</strong><br>
+                                Study Unit Code: <strong>CIS2323</strong><br>
+                                Duration: <strong>2.5 hours</strong><br>
+                                Global Mark Percentage: <strong>50%</strong><br>
+                                Examiner: <strong>Mr Kristian Guillaumier, Dr Colin Layfield</strong>
+                            </p>
+                            <button onclick="location.href = 'lecturerExamView.html';" class="half-box-button">
+                                <h2>View Exam</h2>
+                            </button>
+                        </div>
+                        
+                        
+                    </div>
+    
+    
+
+
+
+
+
+                    
+                    <div class="box">
+                        <h2>Past Exams</h2>
+                        <button class="arrow" id="hide-past">
+                            <img src="Assets/Images/down-arrow-2.png" alt="Down Arrow">
+                        </button>
+                        <button class="arrow" id="show-past">
+                            <img src="Assets/Images/left-arrow-2.png" alt="Left Arrow">
+                        </button>
+                    </div>
+                    <div class="box" id="filter">
+                        
+                        <input type="radio" id="button1" name="buttonGroup" class="radio" checked>
+                        <label for="button1" class="button-label">Uncorrected</label>
+
+                        <input type="radio" id="button2" name="buttonGroup" class="radio">
+                        <label for="button2" class="button-label">Corrected</label>
+
+                        <input type="radio" id="button3" name="buttonGroup" class="radio">
+                        <label for="button3" class="button-label">All</label>
+                    </div>
+
+
+                    <div id="past" class = "half-box-container">
+                        <div id="uncorrected" class="half-box">
+                            <h2>Computer Platforms</h2>
+                            <p> Date: <strong>12/01/2024</strong><br>
+                                Study Unit Code: <strong>CIS1783</strong><br>
+                                Duration: <strong>2 hours</strong><br>
+                                Global Mark Percentage: <strong>80%</strong><br>
+                                Examiner: <strong>Dr Colin Layfield, Mr Tony Spiteri Staines</strong>
+                            </p>
+                            <button onclick="location.href = 'examGrader.html';" class="half-box-button">
+                                <h2>Correct Exam</h2>
+                            </button>
+                        </div>
+
+                        <div id="corrected" class="half-box">
+                            <h2>Research Methods</h2>
+                            <p> Date: <strong>15/01/2024</strong><br>
+                                Study Unit Code: <strong>CIS1553</strong><br>
+                                Duration: <strong>1.5 hours</strong><br>
+                                Global Mark Percentage: <strong>60%</strong><br>
+                                Examiner: <strong>Prof John Abela, Dr Colin Layfield</strong>
+                            </p>
+                            <button id="remove_button" class="half-box-button">
+                                <h2>View Exam</h2>
+                            </button>
+                        </div>
+                    
+                    
+                        
+                    </div>
+                    <!-- Ending of wide column: -->
+                    <script>
+                        document.getElementById('button2').addEventListener('click', function() {
+                        document.getElementById('corrected').style.display = 'flex';
+                        document.getElementById('uncorrected').style.display = 'none';
+                    });
+                    
+                    document.getElementById('button3').addEventListener('click', function() {
+                        document.getElementById('corrected').style.display = 'flex';
+                        document.getElementById('uncorrected').style.display = 'flex';
+                    });
+
+                    document.getElementById('button1').addEventListener('click', function() {
+                        document.getElementById('corrected').style.display = 'none';
+                        document.getElementById('uncorrected').style.display = 'flex';
+                    });
+                    document.getElementById('button1').click();
+
+                    var hidePastButton = document.getElementById('hide-past');
+                    var showPastButton = document.getElementById('show-past');
+                    var pastElement = document.getElementById('past');
+                    var filterElement = document.getElementById('filter');
+                    showPastButton.style.display = 'none';
+                    hidePastButton.addEventListener('click', function() {
+                        
+                            // Elements are currently visible, so hide them
+                            pastElement.style.display = 'none';
+                            filterElement.style.display = 'none';
+                            hidePastButton.style.display = 'none';
+                            showPastButton.style.display = 'flex';
+                        
+                    });
+                    showPastButton.addEventListener('click', function() {
+                            // Elements are currently hidden, so show them
+                            pastElement.style.display = 'flex';
+                            filterElement.style.display = 'flex';
+                            hidePastButton.style.display = 'flex';
+                            showPastButton.style.display = 'none';
+                    });
+                    </script>
+                </div>
+
+                <div class="narrow-column">
+                    <button id="view-groups" class="half-box-button">
+                        <h2>View My Groups</h2>
+                    </button>
+                    
+                    <script src="popup.js"></script>
+                    <div class="calendar">
+                        <div class="calendar-heading">
+                            
+                            <button id="month-arrow-left" class="arrow">
+                                <img src="Assets/Images/left-arrow.png" alt="Left Arrow">
+                            </button>
+                            <h3 id="month-name"></h3>
+                            
+                            
+                                
+                                <script>
+                                    function monthmonth(){
+                                        const currentDate = new Date();
+                                        const currentMonth = currentDate.getMonth();
+                                        // Display month name
+                                        const monthName = document.getElementById('month-name');
+                                        monthName.textContent = getMonthName(currentMonth);
+                                        return monthName;
+                                    }
+                                    function getMonthName(month) {
+                                        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                                        return months[month];
+                                    }
+                                    monthmonth();
+                                </script>
+                                
+                            
+                            <button id="month-arrow-right" class="arrow">
+                                <img src="Assets/Images/right-arrow.png" alt="Right Arrow">
+                            </button>
+                        </div>
+                        
+    
+                        <table id="calendar">
+                            
+                            <thead>
+                                <tr>
+                                    <th>Sun</th>
+                                    <th>Mon</th>
+                                    <th>Tue</th>
+                                    <th>Wed</th>
+                                    <th>Thu</th>
+                                    <th>Fri</th>
+                                    <th>Sat</th>
+                                </tr>
+                            </thead>
+                            <tbody id="calendar-body">
+                                <!-- Calendar cells will be dynamically generated here -->
+                            </tbody>
+                        </table>
+    
+                        <script>
+                            // Function to generate a dynamic calendar
+                            function generateCalendar() {
+                                const calendarBody = document.getElementById('calendar-body');
+                                calendarBody.innerHTML = ''; // Clear existing content
+    
+                                const currentDate = new Date();
+                                const currentMonth = currentDate.getMonth();
+                                const firstDayOfMonth = new Date(currentDate.getFullYear(), currentMonth, 1).getDay();
+                                const daysInMonth = new Date(currentDate.getFullYear(), currentMonth + 1, 0).getDate();
+    
+    
+                                let dayCounter = 1;
+    
+                                for (let i = 0; i < 6; i++) {
+                                    const row = document.createElement('tr');
+    
+                                    for (let j = 0; j < 7; j++) {
+                                        const cell = document.createElement('td');
+    
+                                        if (i === 0 && j < firstDayOfMonth) {
+                                            // Empty cells before the first day of the month
+                                            cell.textContent = '';
+                                        } else if (dayCounter <= daysInMonth) {
+                                            cell.textContent = dayCounter;
+    
+                                            if (currentDate.getDate() === dayCounter && currentDate.getMonth() === currentMonth) {
+                                                // Highlight today's date
+                                                cell.classList.add('today');
+                                            }
+    
+                                            dayCounter++;
+                                        }
+    
+                                        row.appendChild(cell);
+                                    }
+    
+                                    calendarBody.appendChild(row);
+                                }
+                            }
+    
+                            // Call the function to generate the calendar
+                            generateCalendar();
+    
+                            
+                        </script>
+                    </div>
+                    
+                    
+
+
+
+                </div>
+            </div>  
+        <div class="filler-big"></div>
+    </body>
+    <script src="arrows.js"></script>
+    <script src="footer.js"></script>
+</html>

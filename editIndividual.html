@@ -1,0 +1,177 @@
+<html>
+	<head>
+		<script src="common.js"></script>
+	</head>
+	
+    <body>
+        <div class="content">
+			<button class="admin-expand" onclick="expandSidebar()">=&gt</button>
+			
+            <div class="sidebar">
+				<button class="admin-collapse" onclick="collapseSidebar()">X</button>
+				
+				<div class="admin-btns">
+					<a href="adminCreateNewAccount.html"><button>Create New Account</button></a>
+					<a href="adminViewStudentAccounts.html"><button>View Student Accounts</button></a>
+					<a href="adminViewLecturerAccounts.html"><button>View Examiner Accounts</button></a>
+					<a href="adminCreateNewGroup.html"><button>Create New Group</button></a>
+					<a href="adminViewGroups.html"><button>View Groups</button></a>
+				</div>
+			</div>
+			
+			<div class="admin-workspace">
+				<div class="admin-form">
+					<div class="account-type">
+						<label for="accountType">Account Type:</label>
+						
+						<select id="accountType" name="account-type">
+							<option value="student">Student</option>
+							<option value="lecturer">Examiner</option>
+						</select>
+					</div>
+					
+					<input class="logInField" id="admin-form-title" placeholder="Title">
+					
+					<input class="logInField" id="admin-form-name" placeholder="Name">
+					
+					<input class="logInField" id="admin-form-surname" placeholder="Surname">
+					
+					<input class="logInField" id="admin-form-email" placeholder="Email">
+					
+					<input class="logInField" id="admin-form-pass" placeholder="Password">
+					
+					<p id="account-updated"></p>
+					<button id="admin-form-button" onclick="updateAccount()">Update Account</button>
+                </div>
+            </div>
+        </div>
+		
+		<script>
+			function collapseSidebar(){
+				document.getElementsByClassName("sidebar")[0].style.display = "none";
+				
+				document.getElementsByClassName("admin-expand")[0].style.display = "block";
+			}
+			
+			function expandSidebar(){
+				document.getElementsByClassName("sidebar")[0].style.display = "block";
+				
+				document.getElementsByClassName("admin-expand")[0].style.display = "none";
+			}
+			
+			const individualID = new URLSearchParams(window.location.search);
+				
+			if(individualID.get("i") == "1"){
+				document.getElementById("admin-form-name").value = "Marty";
+				
+				document.getElementById("admin-form-surname").value = "McFly";
+				
+				document.getElementById("admin-form-email").value = "marty.mcfly.24@um.edu.mt";
+				
+				document.getElementById("admin-form-pass").value = "pasword0";
+			}
+			if(individualID.get("i") == "2"){
+				document.getElementById("admin-form-name").value = "James";
+				
+				document.getElementById("admin-form-surname").value = "Mizzi";
+				
+				document.getElementById("admin-form-email").value = "james.mizzi.22@um.edu.mt";
+				
+				document.getElementById("admin-form-pass").value = "pasword1";
+			}
+			if(individualID.get("i") == "3"){
+				document.getElementById("admin-form-name").value = "Neville";
+				
+				document.getElementById("admin-form-surname").value = "Grech";
+				
+				document.getElementById("admin-form-email").value = "neville.grech.22@um.edu.mt";
+				
+				document.getElementById("admin-form-pass").value = "password2";
+			}
+			if(individualID.get("i") == "4"){
+				document.getElementById("admin-form-name").value = "Peter Paul";
+				
+				document.getElementById("admin-form-surname").value = "Buttigieg";
+				
+				document.getElementById("admin-form-email").value = "peter.buttigieg.22@um.edu.mt";
+				
+				document.getElementById("admin-form-pass").value = "password3";
+			}
+			if(individualID.get("i") == "5"){
+				document.getElementById("admin-form-name").value = "Charlon";
+				
+				document.getElementById("admin-form-surname").value = "Curmi";
+				
+				document.getElementById("admin-form-email").value = "charlon.curmi.22@um.edu.mt";
+				
+				document.getElementById("admin-form-pass").value = "password4";
+			}
+			if(individualID.get("i") == "6"){
+				document.getElementById("admin-form-name").value = "Jeremy";
+				
+				document.getElementById("admin-form-surname").value = "Grima";
+				
+				document.getElementById("admin-form-email").value = "jeremy.grima.22@um.edu.mt";
+				
+				document.getElementById("admin-form-pass").value = "password5";
+			}
+			if(individualID.get("i") == "7"){
+				document.getElementById("accountType").value = "lecturer";
+				
+				document.getElementById("admin-form-title").value = "Dr";
+				
+				document.getElementById("admin-form-name").value = "Chris";
+				
+				document.getElementById("admin-form-surname").value = "Porter";
+				
+				document.getElementById("admin-form-email").value = "chris.porter@um.edu.mt";
+				
+				document.getElementById("admin-form-pass").value = "password6";
+			}
+			if(individualID.get("i") == "8"){
+				document.getElementById("accountType").value = "lecturer";
+				
+				document.getElementById("admin-form-title").value = "Dr";
+				
+				document.getElementById("admin-form-name").value = "Colin";
+				
+				document.getElementById("admin-form-surname").value = "Layfield";
+				
+				document.getElementById("admin-form-email").value = "colin.layfield@um.edu.mt";
+				
+				document.getElementById("admin-form-pass").value = "password7";
+			}
+			if(individualID.get("i") == "9"){
+				document.getElementById("accountType").value = "lecturer";
+				
+				document.getElementById("admin-form-title").value = "Dr";
+				
+				document.getElementById("admin-form-name").value = "Joseph";
+				
+				document.getElementById("admin-form-surname").value = "Vella";
+				
+				document.getElementById("admin-form-email").value = "joseph.vella@um.edu.mt";
+				
+				document.getElementById("admin-form-pass").value = "password8";
+			}
+			if(individualID.get("i") == "10"){
+				document.getElementById("accountType").value = "lecturer";
+			
+				document.getElementById("admin-form-title").value = "Mr";
+				
+				document.getElementById("admin-form-name").value = "Chris";
+				
+				document.getElementById("admin-form-surname").value = "Colombo";
+				
+				document.getElementById("admin-form-email").value = "chris.colombo@um.edu.mt";
+				
+				document.getElementById("admin-form-pass").value = "password9";
+			}
+			
+			function updateAccount(){
+				var text = document.getElementById("account-updated");
+				text.innerText = "Account Successfully Updated!";
+			}
+		</script>
+    </body>
+</html>
