@@ -1510,6 +1510,7 @@ a button{
 .admin-form .account-type, #admin-form-email, #admin-form-pass, #admin-form-button{
 	margin: 3% auto;
 	width: 80%;
+    color: black;
 }
 
 #admin-form-title{
